@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google'
 
 import '@mantine/core/styles.css'
 import { ColorSchemeScript, MantineProvider } from '@mantine/core'
+import { Header } from '@/components/header'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({
             headings: { fontFamily: poppins.style.fontFamily },
           }}
         >
+          <Header />
           {children}
         </MantineProvider>
       </body>
