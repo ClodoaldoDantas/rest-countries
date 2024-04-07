@@ -5,7 +5,7 @@ import styles from './styles.module.css'
 export function Header() {
   return (
     <Box component="header" py="md" className={styles.header}>
-      <Container>
+      <Container size="xl">
         <Flex wrap="wrap" align="center" justify="space-between">
           <Text component="h1" fw={600} size="xl">
             Where in the world?
