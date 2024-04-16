@@ -1,37 +1,46 @@
 'use client'
 
 import { Card, Flex, Image, Text } from '@mantine/core'
+import { Country } from '../country-list'
 
-export function CountryCard() {
+export function CountryCard({ country }: { country: Country }) {
   return (
     <Card shadow="sm" padding="xl">
       <Card.Section>
-        <Image src="https://flagcdn.com/w320/de.png" alt="Germany Flag" />
+        <Image
+          height={150}
+          w="100%"
+          fit="cover"
+          src={country.flags.svg}
+          alt={`${country.name.common} Flag`}
+        />
       </Card.Section>
 
       <Text fw={600} size="lg" mt="md">
-        Germany
+        {country.name.common}
       </Text>
 
       <Flex mt="xs" gap={4}>
         <Text fw={500} size="sm">
           Population:
         </Text>
-        <Text size="sm">81,770,900</Text>
+        <Text size="sm">
+          {new Intl.NumberFormat().format(country.population)}
+        </Text>
       </Flex>
 
       <Flex mt="xs" gap={4}>
         <Text fw={500} size="sm">
           Region:
         </Text>
-        <Text size="sm">Europe</Text>
+        <Text size="sm">{country.region}</Text>
       </Flex>
 
       <Flex mt="xs" gap={4}>
         <Text fw={500} size="sm">
           Capital:
         </Text>
-        <Text size="sm">Berlin</Text>
+        <Text size="sm">{country.capital.join(', ')}</Text>
       </Flex>
     </Card>
   )
