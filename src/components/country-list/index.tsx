@@ -5,6 +5,7 @@ import { Country } from '@/types/country'
 import { SimpleGrid } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
+import { CountryListSkeleton } from '../country-list-skeleton'
 
 type FetchCountriesParams = {
   name?: string
@@ -43,10 +44,14 @@ export function CountryList() {
   const name = searchParams.get('name') ?? ''
   const region = searchParams.get('region') ?? ''
 
-  const { data: countries } = useQuery({
+  const { data: countries, isLoading } = useQuery({
     queryKey: ['countries', name, region],
     queryFn: () => fetchCountries({ name, region }),
   })
+
+  if (isLoading) {
+    return <CountryListSkeleton />
+  }
 
   return (
     <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="md" my="xl">
