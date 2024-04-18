@@ -45,7 +45,7 @@ export function CountryList() {
   const region = searchParams.get('region') ?? ''
 
   const { data: countries, isLoading } = useQuery({
-    queryKey: ['countries', name, region],
+    queryKey: ['countries', { name, region }],
     queryFn: () => fetchCountries({ name, region }),
   })
 
