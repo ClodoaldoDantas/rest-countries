@@ -1,1 +1,7 @@
 GET https://restcountries.com/v3.1/all?fields=name,region,population,capital
+
+###
+GET https://restcountries.com/v3.1/name/brazil
+
+###
+GET https://restcountries.com/v3.1/region/europe
