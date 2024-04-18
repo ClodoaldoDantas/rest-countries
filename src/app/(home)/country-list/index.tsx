@@ -1,10 +1,10 @@
 'use client'
 
-import { CountryCard } from '@/components/country-card'
 import { Country } from '@/types/country'
 import { SimpleGrid } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
+import { CountryCard } from '../country-card'
 import { CountryListSkeleton } from '../country-list-skeleton'
 
 type FetchCountriesParams = {

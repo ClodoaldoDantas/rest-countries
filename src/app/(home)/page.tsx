@@ -1,5 +1,5 @@
-import { CountryList } from '@/components/country-list'
-import { Filters } from '@/components/filters'
+import { CountryList } from './country-list'
+import { Filters } from './filters'
 import { Container } from '@mantine/core'
 
 export default function Home() {
