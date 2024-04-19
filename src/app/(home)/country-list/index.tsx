@@ -1,11 +1,12 @@
 'use client'
 
 import { Country } from '@/types/country'
-import { SimpleGrid } from '@mantine/core'
+import { Alert, SimpleGrid } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { CountryCard } from '../country-card'
 import { CountryListSkeleton } from '../country-list-skeleton'
+import { AlertCircle } from 'lucide-react'
 
 type FetchCountriesParams = {
   name?: string
@@ -35,6 +36,10 @@ async function fetchCountries({
   const response = await fetch(url.toString())
   const data = await response.json()
 
+  if (data.status === 404) {
+    throw new Error('Country not found')
+  }
+
   return data
 }
 
@@ -44,13 +49,30 @@ export function CountryList() {
   const name = searchParams.get('name') ?? ''
   const region = searchParams.get('region') ?? ''
 
-  const { data: countries, isLoading } = useQuery({
+  const {
+    data: countries,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ['countries', { name, region }],
     queryFn: () => fetchCountries({ name, region }),
   })
 
   if (isLoading) {
     return <CountryListSkeleton />
+  }
+
+  if (isError) {
+    return (
+      <Alert
+        title="Ocorreu um problema"
+        color="red"
+        icon={<AlertCircle />}
+        my="xl"
+      >
+        Não foi possível carregar os países de acordo com os filtros
+      </Alert>
+    )
   }
 
   return (
