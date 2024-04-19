@@ -14,5 +14,5 @@ export type Country = {
   }
   currencies: Record<string, { name: string; symbol: string }>
   languages: Record<string, string>
-  borders: string[]
+  borders?: string[]
 }

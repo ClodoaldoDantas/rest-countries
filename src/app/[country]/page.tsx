@@ -18,6 +18,8 @@ async function fetchCountry(name: string): Promise<Country> {
 
   const [data] = await response.json()
 
+  console.log(data)
+
   return data
 }
 
@@ -73,19 +75,21 @@ export default async function CountryPage({ params }: CountryPageParams) {
             <Info label="Languages" value={languages} />
           </Box>
 
-          <Flex wrap="wrap" align="center" gap="md">
-            <Text fw={500} component="strong">
-              Border Countries:
-            </Text>
+          {data.borders && data.borders.length > 0 && (
+            <Flex wrap="wrap" align="center" gap="md">
+              <Text fw={500} component="strong">
+                Border Countries:
+              </Text>
 
-            <Group gap="xs">
-              {data.borders.map(border => (
-                <Badge variant="default" key={border}>
-                  {border}
-                </Badge>
-              ))}
-            </Group>
-          </Flex>
+              <Group gap="xs">
+                {data.borders.map(border => (
+                  <Badge variant="default" key={border}>
+                    {border}
+                  </Badge>
+                ))}
+              </Group>
+            </Flex>
+          )}
         </Box>
       </Flex>
     </Container>
